@@ -1,0 +1,18 @@
+{% extends "wish_list_app/base.html" %}
+
+{% block title %} Website details {% endblock %}
+
+{% block content %}
+    {% if meta_info %}
+        {% for name, data in meta_info.items %}
+            <p>{{ name }} : {{ data }}</p>
+        {% endfor %}
+
+    {% endif %}
+    <h1>Get metadata</h1>
+    <form method="post">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <input type="submit" value="Get metadata">
+    </form>
+{% endblock %}

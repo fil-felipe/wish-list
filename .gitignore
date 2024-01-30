@@ -1,0 +1,4 @@
+*.idea
+wish_list_venv
+__pycache__
+db.sqlite3

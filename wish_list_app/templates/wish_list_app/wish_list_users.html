@@ -1,0 +1,14 @@
+{% extends "wish_list_app/base.html" %}
+
+{% block title %}Listy prezentów{% endblock %}
+
+{% block content %}
+    <h1>Wybierz czyje listy prezezntów chcesz obejrzeć</h1>
+    {% if users %}
+        {% for user in users %}
+            <a href="{% url 'wish_list_app:user_lists' user.id %}">{{ user.first_name }} {{ user.last_name }}</a>
+        {% endfor %}
+
+    {% endif %}
+
+{% endblock %}

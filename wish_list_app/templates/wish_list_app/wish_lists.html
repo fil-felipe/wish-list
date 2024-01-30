@@ -1,0 +1,14 @@
+{% extends "wish_list_app/base.html" %}
+
+{% block title %}Listy prezentów{% endblock %}
+
+{% block content %}
+    <h1>Wybierz którą listę chcesz obejrzeć</h1>
+    {% if user_wish_lists %}
+        {% for list in user_wish_lists %}
+            <p>{{ list.list_name }}</p>
+        {% endfor %}
+
+    {% endif %}
+
+{% endblock %}
