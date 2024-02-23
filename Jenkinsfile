@@ -8,7 +8,7 @@ pipeline {
         }
         stage('Migrate') { 
             steps {
-                sh 'python3 -m manage.py  makemigrations' 
+                sh '/usr/bin/python3.8 manage.py  makemigrations' 
             }
         }
     }
