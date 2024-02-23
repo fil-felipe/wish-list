@@ -1,7 +1,7 @@
 pipeline {
     agent any 
     stages {
-        stage('Intall') { 
+        stage('Install') { 
             steps {
                 sh 'python3 -m pip install -r requirements.txt' 
             }
