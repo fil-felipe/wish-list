@@ -14,7 +14,7 @@ pipeline {
         }
         stage('Collect Static') { 
             steps {
-                sh '/usr/bin/python3.8 manage.py  collectstatic -yes' 
+                sh '/usr/bin/python3.8 manage.py  collectstatic --noinput' 
             }
         }
         stage('Run') { 
