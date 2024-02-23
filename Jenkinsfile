@@ -1,10 +1,14 @@
 pipeline {
     agent any 
     stages {
-        stage('Build') { 
+        stage('Intall') { 
             steps {
                 sh 'python3 -m pip install -r requirements.txt' 
-                sh 'echo "DONE"' 
+            }
+        }
+        stage('Migrate') { 
+            steps {
+                sh './manage.py  makemigrations' 
             }
         }
     }
