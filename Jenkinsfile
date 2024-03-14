@@ -7,30 +7,9 @@ pipeline {
         DJANGO_SUPERUSER_EMAIL  = credentials('django-superuser-mail')
     }
     stages {
-        stage('Install') { 
+        stage('docker compose') { 
             steps {
-                sh 'python3 -m pip install -r requirements.txt' 
-            }
-        }
-        stage('Migrate') { 
-            steps {
-                sh '/usr/bin/python3.8 manage.py  makemigrations' 
-                sh '/usr/bin/python3.8 manage.py  migrate' 
-            }
-        }
-        stage('Create super user') { 
-            steps {
-                sh '/usr/bin/python3.8 manage.py  createsuperuser --noinput' 
-            }
-        }
-        stage('Collect Static') { 
-            steps {
-                sh '/usr/bin/python3.8 manage.py  collectstatic --noinput' 
-            }
-        }
-        stage('Run') { 
-            steps {
-                sh 'JENKINS_NODE_COOKIE=dontKillMe nohup /usr/bin/python3.8 manage.py runserver 192.168.0.108:8000 &' 
+                sh 'docker compose up' 
             }
         }
     }

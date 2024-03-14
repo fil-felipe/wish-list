@@ -1,5 +1,6 @@
 wish_list_venv
 local.txt
+/data/
 
 # DB migrations
 migrations/
