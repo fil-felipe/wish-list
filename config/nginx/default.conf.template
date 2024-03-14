@@ -5,7 +5,7 @@ upstream uwsgi_app {
 
 server {
     listen 80;
-    server_name www.educaproject.com educaproject.com;
+    server_name www.prezent.filip-adamek.pl prezent.filip-adamek.pl;
     error_log    stderr warn;
     access_log   /dev/stdout main;
 
