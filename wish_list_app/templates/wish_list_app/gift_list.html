@@ -11,11 +11,18 @@
         {% for gift in gift_list %}
             <div class="gift-object">
                 <div>
-                    <img class="thumbnail" src={{ gift.image_url }}>
+                    {% if gift.image_url %}
+                        <img class="thumbnail" src={{ gift.image_url }}>
+                    {% else %}
+                        {% load static %}
+                        <img class="thumbnail" src="{% static 'images/unknown_gift.jpg' %}">
+                    {% endif %}
                 </div>
                 <div class="gift-details">
                     <h3>{{ gift.title }}</h3>
-                    <a href={{ gift.offer_url }}>Link do oferty</a>
+                    {% if gift.offer_url %}
+                        <a href={{ gift.offer_url }}>Link do oferty</a>
+                    {% endif %}
                 </div>
                 <div class="gift-details">
                         <a class="btn btn-primary" href="{{ gift.get_reserved_url }}" role="button">Zarezerwuj</a>
