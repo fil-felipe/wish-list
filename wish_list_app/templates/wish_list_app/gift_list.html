@@ -1,0 +1,29 @@
+{% extends "wish_list_app/base.html" %}
+
+{% block title %}Lista prezentów{% endblock %}
+
+{% block content %}
+    <div class="gift-header">
+        <h1>Propozycje prezentów</h1>
+    </div>
+
+    {% if gift_list %}
+        {% for gift in gift_list %}
+            <div class="gift-object">
+                <div>
+                    <img class="thumbnail" src={{ gift.image_url }}>
+                </div>
+                <div class="gift-details">
+                    <h3>{{ gift.title }}</h3>
+                    <a href={{ gift.offer_url }}>Link do oferty</a>
+                </div>
+                <div class="gift-details">
+                        <a class="btn btn-primary" href="{{ gift.get_reserved_url }}" role="button">Zarezerwuj</a>
+                </div>
+
+            </div>
+        {% endfor %}
+
+    {% endif %}
+
+{% endblock %}

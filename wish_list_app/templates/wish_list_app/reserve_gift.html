@@ -1,0 +1,14 @@
+{% extends "wish_list_app/base.html" %}
+
+{% block title %}Rezerwacja prezentu{% endblock %}
+
+{% block content %}
+<h3>Podaj kto rezerwuje prezent</h3>
+<p>{{ gift.title }}</p>
+<form action="{{ gift.get_reserved_url }}" method="post">
+    {{ form.as_p }}
+    {% csrf_token %}
+    <input class="btn btn-primary" type="submit" value="Zarezerwuj">
+</form>
+<a href="{{ gift.get_absolute_url }}">Powrót</a>
+{% endblock %}

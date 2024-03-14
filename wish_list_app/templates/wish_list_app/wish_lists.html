@@ -5,10 +5,13 @@
 {% block content %}
     <h1>Wybierz którą listę chcesz obejrzeć</h1>
     {% if user_wish_lists %}
+        <ul>
         {% for list in user_wish_lists %}
-            <p>{{ list.list_name }}</p>
+            <li>
+                <a href="{{ list.get_absolute_url }}">{{ list.list_name }}</a>
+            </li>
         {% endfor %}
-
+        </ul>
     {% endif %}
 
 {% endblock %}

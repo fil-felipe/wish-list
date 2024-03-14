@@ -3,12 +3,18 @@
 {% block title %}Listy prezentów{% endblock %}
 
 {% block content %}
-    <h1>Wybierz czyje listy prezezntów chcesz obejrzeć</h1>
+    <h1>Wybierz czyje listy prezentów chcesz obejrzeć</h1>
     {% if users %}
+        <ul>
         {% for user in users %}
-            <a href="{% url 'wish_list_app:user_lists' user.id %}">{{ user.first_name }} {{ user.last_name }}</a>
+            <li>
+<!--                <a href="{% url 'wish_list_app:user_lists' user.id %}">-->
+                <a href="{{ user.get_absolute_url }}">
+                    {{ user.first_name }} {{ user.last_name }}
+                </a>
+            </li>
         {% endfor %}
-
+        </ul>
     {% endif %}
 
 {% endblock %}
