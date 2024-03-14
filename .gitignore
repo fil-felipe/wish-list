@@ -4,7 +4,7 @@ local.txt
 
 # DB migrations
 migrations/
-
+static/admin/
 # Django #
 *.log
 *.pot
