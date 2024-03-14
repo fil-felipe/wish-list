@@ -7,7 +7,7 @@ ADMINS = [
     ('Filip A', 'filip.adamek@outlook.com')
 ]
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['prezent.filip-adamek.pl', 'www.prezent.filip-adamek.pl']
 
 DATABASES = {
     'default': {
