@@ -4,21 +4,8 @@ upstream uwsgi_app {
 }
 
 server {
-   listen 80;
-   server_name www.prezent.filip-adamek.pl prezent.filip-adamek.pl;
-   location ~/.well-known/acme-challenge {
-        allow all;
-        root /var/www/certbot;
-    }
-   return 301 https://$host:$request_uri;
-}
-
-server {
-
-    listen 443 ssl;
+    listen 80;
     server_name www.prezent.filip-adamek.pl prezent.filip-adamek.pl;
-    ssl_certificate /etc/letsencrypt/live/prezent.filip-adamek.pl/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/prezent.filip-adamek.pl/privkey.pem;
     error_log    stderr warn;
     access_log   /dev/stdout main;
 
