@@ -7,7 +7,7 @@ server {
     listen 80;
     listen 443 ssl;
     ssl_certificate /code/ssl/prezent.crt;
-    ssl_certificate /code/ssl/prezent.key;
+    ssl_certificate_key /code/ssl/prezent.key;
     server_name www.prezent.filip-adamek.pl prezent.filip-adamek.pl;
     error_log    stderr warn;
     access_log   /dev/stdout main;
