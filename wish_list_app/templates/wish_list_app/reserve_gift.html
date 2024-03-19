@@ -1,14 +1,14 @@
 {% extends "wish_list_app/base.html" %}
-
+{% load crispy_forms_tags %}
 {% block title %}Rezerwacja prezentu{% endblock %}
 
 {% block content %}
 <h3>Podaj kto rezerwuje prezent</h3>
-<p>{{ gift.title }}</p>
+<button type="button" class="btn btn-outline-primary btn-lg" >{{ gift.title }}</button>
 <form action="{{ gift.get_reserved_url }}" method="post">
-    {{ form.as_p }}
     {% csrf_token %}
+    {{ form|crispy }}
     <input class="btn btn-primary" type="submit" value="Zarezerwuj">
 </form>
-<a href="{{ gift.get_absolute_url }}">Powrót</a>
+<a class="btn btn-secondary" href="{{ gift.get_absolute_url }}" role="button">Powrót</a>
 {% endblock %}

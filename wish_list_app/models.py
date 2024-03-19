@@ -48,7 +48,7 @@ class Gift(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     reserved = models.BooleanField(default=False)
     # reserved_user = models.ForeignKey(PresentUser, models.SET_NULL, blank=True, null=True)
-    reserved_user = models.CharField(max_length=250, blank=True, null=True)
+    reserved_user = models.CharField("Osoba rezerwująca", max_length=250, blank=True, null=True)
     reserved_time = models.DateTimeField(null=True, blank=True)
 
     class Meta:
