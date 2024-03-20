@@ -3,25 +3,37 @@ upstream uwsgi_app {
     server unix:/code/uwsgi_app.sock;
 }
 
+# server {
+#    listen 80;
+#    listen 443 ssl;
+#    ssl_certificate /code/ssl/prezent.crt;
+#    ssl_certificate_key /code/ssl/prezent.key;
+#    server_name www.prezent.filip-adamek.pl prezent.filip-adamek.pl;
+#    error_log    stderr warn;
+#    access_log   /dev/stdout main;
+#
+#    location / {
+#        include      /etc/nginx/uwsgi_params;
+#        uwsgi_pass   uwsgi_app;
+#    }
+#
+#    location /static {
+#        alias /code/static/;
+#    }
+#
+#    location /media/ {
+#        alias /code/educa/media/;
+#    }
+#}
+
 server {
     listen 80;
-    listen 443 ssl;
-    ssl_certificate /code/ssl/prezent.crt;
-    ssl_certificate_key /code/ssl/prezent.key;
     server_name www.prezent.filip-adamek.pl prezent.filip-adamek.pl;
-    error_log    stderr warn;
-    access_log   /dev/stdout main;
 
-    location / {
-        include      /etc/nginx/uwsgi_params;
-        uwsgi_pass   uwsgi_app;
+    location ~/.well-known/acme-challenge {
+        allow all;
+        root /var/www/certbot;
     }
 
-    location /static {
-        alias /code/static/;
-    }
-
-    location /media/ {
-        alias /code/educa/media/;
-    }
+    return 301 https://$host:$request_uri;
 }
