@@ -21,7 +21,7 @@ server {
     }
 
     location /media/ {
-        alias /code/educa/media/;
+        alias /code/media/;
     }
 }
 
