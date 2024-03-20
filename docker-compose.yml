@@ -6,6 +6,7 @@ services:
     restart: always
     volumes:
       - ./data/db:/var/lib/postgresql/data
+#      - /var/certbot/conf:/etc/letsencrypt/:ro
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
@@ -18,7 +19,6 @@ services:
     restart: always
     volumes:
       - .:/code
-      - /var/certbot/conf:/etc/letsencrypt/:ro
     environment:
       - DJANGO_SETTINGS_MODULE=wish_list.settings.prod
       - POSTGRES_DB=postgres
@@ -28,21 +28,19 @@ services:
       - db
 
   nginx:
-    image: nginx:alpine
-    restart: unless-stopped
+    image: nginx:1.23.1
+    restart: always
     volumes:
       - ./config/nginx:/etc/nginx/templates
       - .:/code
     ports:
       - "80:80"
       - "443:443"
-    depends_on:
-      - web
 
-  certbot:
-    image: certbot/certbot:latest
-    volumes:
-      - /var/certbot/conf:/etc/letsencrypt/:rw
-      - /var/certbot/www/:/var/www/certbot/:rw
-    depends_on:
-      - nginx
+#  certbot:
+#    image: certbot/certbot:latest
+#    volumes:
+#      - /var/certbot/conf:/etc/letsencrypt/:rw
+#      - /var/certbot/www/:/var/www/certbot/:rw
+#    depends_on:
+#      - nginx
