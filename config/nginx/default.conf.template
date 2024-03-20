@@ -4,7 +4,6 @@ upstream uwsgi_app {
 }
 
 server {
-    listen 80;
     listen 443 ssl;
     ssl_certificate /code/ssl/prezent.crt;
     ssl_certificate_key /code/ssl/prezent.key;
@@ -24,4 +23,16 @@ server {
     location /media/ {
         alias /code/educa/media/;
     }
+}
+
+server {
+    listen 80;
+    server_name your_domain.com;
+
+    location ~/.well-known/acme-challenge {
+        allow all;
+        root /var/www/certbot;
+    }
+
+    return 301 https://$host:$request_uri;
 }
