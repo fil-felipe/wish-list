@@ -1,3 +1,15 @@
+# Local application run
+
+## run application from terminal
+```bash
+python .\app\manage.py runserver --settings=wish_list.settings_dev
+```
+
+## run application as local docker
+``
+docker-compose up -d --build
+``
+
 # Python code checks
 
 ## Black
