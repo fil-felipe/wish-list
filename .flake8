@@ -7,3 +7,4 @@ exclude =
     settings.py
     env
     wish_list_venv
+    app\wish_list\settings_dev.py
