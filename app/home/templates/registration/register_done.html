@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Witamy!{% endblock %}
+
+{% block content %}
+<div class="px-4 pt-5 my-5 text-center">
+    <h3 class="display-4 fw-bold">Cześć {{ new_user.first_name }}!</h3>
+    <div class="col-lg-6 mx-auto">
+        <p class="lead mb-4">
+            Twoje konto zostało pomyślnie założone.<br>
+            Możesz się teraz <a href="{% url 'home:login' %}">zalogować</a>.
+        </p>
+    </div>
+{% endblock %}

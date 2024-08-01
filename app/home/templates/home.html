@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Lista prezentów{% endblock %}
+
+{% block content %}
+<div class="px-4 pt-5 my-5 text-center">
+    {% load static %}
+        <img class="d-block mx-auto mb-2 rounded" src="{% static 'images/wish_list_logo.jpg' %}" alt="wish list logo" width="300rem" height="300rem">
+    <h1 class="display-4 fw-bold">Witaj w aplikacji lista prezentów</h1>
+
+    <div class="col-lg-6 mx-auto">
+        <p class="lead mb-4">
+            {% if request.user.is_authenticated %}
+                Co chcesz zrobić?
+            {% else %}
+                Aby przejść dalej zaloguj sie lub zarejestruj.
+            {% endif %}
+        </p>
+    </div>
+
+
+        {% if request.user.is_authenticated %}
+        <div class="mx-auto p-2">
+            <a type="button" class="btn btn btn-outline-primary btn-lg px-4" href="{% url 'home:users' %}">
+                <img src="{% static 'images/people.svg' %}" width="30" height="30" alt="home logo"/>
+                Zobacz obdarowanych
+            </a>
+        </div>
+        <div class="mx-auto p-2">
+            <a type="button" class="btn btn-outline-success btn-lg px-4" href="{% url 'wish_list_app:all_wish_lists' %}">
+                <img src="{% static 'images/view-list.svg' %}" width="30" height="30" alt="home logo"/>
+                Zobacz listy prezentów
+            </a>
+        </div>
+        <hr class="mt-2 mb-3"/>
+        <div class="mx-auto p-2">
+            <a type="button" class="btn btn-primary btn-lg px-4" href="{% url 'wish_list_app:add_wish_list' %}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
+                    <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5m.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1z"/>
+                </svg>
+                Dodaj nową listę prezentów</a>
+        </div>
+        <div class="mx-auto p-2">
+            <a type="button" class="btn btn-success btn-lg px-4" href="{% url 'wish_list_app:add_gift' %}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                </svg>
+                Dodaj nowy prezent
+            </a>
+        </div>
+        {% else %}
+            <a type="button" class="btn btn-primary btn-lg px-4 me-sm-3" href="{% url 'home:login' %}">Zaloguj</a>
+            <a type="button" class="btn btn-outline-secondary btn-lg px-4" href="{% url 'home:register' %}">Zarejestruj</a>
+        {% endif %}
+    </div>
+</div>
+
+
+{% endblock %}

@@ -1,30 +1,12 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
 
-
-class GiftUser(models.Model):
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    slug = models.SlugField(max_length=250, unique=True)
-    email = models.EmailField()
-
-    class Meta:
-        ordering = ["slug", "last_name", "first_name"]
-        indexes = [models.Index(fields=["slug", "last_name", "first_name"])]
-        verbose_name = "Obdarowany"
-        verbose_name_plural = "Obdarowani"
-
-    def __str__(self):
-        return self.slug
-
-    def get_absolute_url(self):
-        return reverse("wish_list_app:user_lists", args=[self.slug])
-
-
-class GiftList(models.Model):
-    list_name = models.CharField(max_length=250)
+class WishList(models.Model):
+    list_name = models.CharField(max_length=250, verbose_name="Nazwa listy")
     slug = models.SlugField(max_length=250)
-    list_user = models.ForeignKey(GiftUser, on_delete=models.CASCADE, related_name="gift_lists")
+    list_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="gift_lists_user", verbose_name="Obdarowany")
+    list_creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name="gift_lists_creator")
 
     class Meta:
         ordering = ["list_name"]
@@ -36,19 +18,18 @@ class GiftList(models.Model):
         return self.list_name
 
     def get_absolute_url(self):
-        return reverse("wish_list_app:gift_lists", args=[self.list_user.slug, self.slug])
-
+        return reverse("wish_list_app:gift_lists", args=[self.list_user.username, self.slug])
 
 class Gift(models.Model):
-    gift_list = models.ForeignKey(GiftList, on_delete=models.CASCADE, related_name="gift_item")
-    title = models.CharField(max_length=250)
+    gift_list = models.ForeignKey(WishList, on_delete=models.CASCADE, related_name="gift_item", verbose_name="Lista prezentów")
+    title = models.CharField(max_length=250, verbose_name="Co to za prezent")
     slug = models.SlugField(max_length=250)
-    offer_url = models.URLField(null=True, blank=True)
-    image_url = models.URLField(null=True, blank=True)
+    offer_url = models.URLField(null=True, blank=True, verbose_name="Link do oferty")
+    image_url = models.URLField(null=True, blank=True, verbose_name="Link do zdjęcia")
     created = models.DateTimeField(auto_now_add=True)
     reserved = models.BooleanField(default=False)
-    # reserved_user = models.ForeignKey(PresentUser, models.SET_NULL, blank=True, null=True)
-    reserved_user = models.CharField("Osoba rezerwująca", max_length=250, blank=True, null=True)
+    reserved_user = models.ForeignKey(User, models.SET_NULL, blank=True, null=True)
+    # reserved_user = models.CharField(max_length=250, blank=True, null=True , verbose_name="Osoba rezerwująca")
     reserved_time = models.DateTimeField(null=True, blank=True)
 
     class Meta:
@@ -61,12 +42,12 @@ class Gift(models.Model):
         return self.title
 
     def get_user_name(self):
-        return self.gift_list.list_user.slug
+        return self.gift_list.list_user.username
 
     def get_absolute_url(self):
-        return reverse("wish_list_app:gift_lists", args=[self.gift_list.list_user.slug, self.gift_list.slug])
+        return reverse("wish_list_app:gift_lists", args=[self.gift_list.list_user.username, self.gift_list.slug])
 
     def get_reserved_url(self):
         return reverse(
-            "wish_list_app:reserve_gift", args=[self.gift_list.list_user.slug, self.gift_list.slug, self.slug]
+            "wish_list_app:reserve_gift", args=[self.gift_list.list_user.username, self.gift_list.slug, self.slug]
         )

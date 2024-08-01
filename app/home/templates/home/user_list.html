@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Listy prezentów{% endblock %}
+
+{% block content %}
+    <div class="px-4 pt-5 my-5 text-center">
+        <h1 class="display-2 fw-bold">Lista obdarowanych</h1>
+        <div class="col-lg-6 mx-auto">
+            <p class="lead mb-4">Wybierz czyje listy prezentów chcesz obejrzeć</p>
+        </div>
+        {% if all_users %}
+        <div class="list-group p-3">
+            {% for user in all_users %}
+            <a href="{% url 'wish_list_app:user_lists' user.username %}"
+               class="list-group-item list-group-item-action display-6
+               {% if forloop.counter0|divisibleby:2 %} list-group-item-primary{% endif %}"
+            >
+                {{ user.first_name }} {{ user.last_name }}
+            </a>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="col-lg-6 mx-auto">
+            <p class="lead mb-4">Brak użytkowników do wyświetlenia</p>
+        </div>
+        {% endif %}
+    </div>
+
+{% endblock %}

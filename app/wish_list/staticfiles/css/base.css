@@ -1,0 +1,27 @@
+img.thumbnail {
+  width: 10rem;
+  height: 10rem;
+  object-fit: scale-down;
+}
+
+div.gift-header {
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    border-radius: 5px;
+    background-color: #C6DCBA;
+    padding: 0.2rem;
+    margin: 0.2rem 5rem;
+    text-align: center;
+    justify-content: center;
+}
+
+div.gift-object {
+    border: solid;
+    padding: 0.5rem;
+    margin: 1rem;
+    display: flex;
+}
+
+div.gift-details {
+    margin:auto;
+}
+

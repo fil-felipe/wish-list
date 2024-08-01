@@ -3,9 +3,14 @@ from . import views
 
 app_name = "wish_list_app"
 urlpatterns = [
-    path("", views.view_wish_list_user, name="list_users"),
-    path("<slug:user>/", views.view_wish_list, name="user_lists"),
-    path("<slug:user>/<slug:list_name>/", views.view_wish_list_items, name="gift_lists"),
-    path("reserve/<slug:user>/<slug:list_name>/<slug:gift>/", views.reserve_gift, name="reserve_gift"),
+    path("wish_lists", views.view_all_wish_lists, name="all_wish_lists"),
+    path("<username>/", views.view_wish_list, name="user_lists"),
+    path("add_list", views.add_wish_list, name="add_wish_list"),
+    path("add_list/<username>", views.add_wish_list, name="add_wish_list_user"),
+    path("<username>/<slug:list_name>/", views.view_wish_list_gifts, name="gift_lists"),
+    path("add_gift", views.add_gift, name="add_gift"),
+    path("add_gift/<slug:list_name>", views.add_gift, name="add_gift_list"),
+    path("reserved", views.reserve_gift, name="reserve_gift"),
     path("find_meta", views.find_meta_info, name="find_meta"),
 ]
+

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Rejestracja{% endblock %}
+
+{% block content %}
+<h1 class="display-4 fw-bold">Dodaj nowego użytkownika.</h1>
+<p class="lead mb-4">
+    Niezależnie czy chcesz rezerwować prezenty czy tworzyć nowe listy, obdarowani i obdarowujący muszą posiadać konto.
+</p>
+<form method="post">
+    {% csrf_token %}
+    {{ user_form|crispy }}
+    <input class="btn btn-primary" type="submit" value="Zarejestruj">
+</form>
+{% endblock %}

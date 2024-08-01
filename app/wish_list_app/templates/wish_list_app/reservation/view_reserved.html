@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}Rezerwacja prezentu{% endblock %}
+
+{% block content %}
+<a class="text-dark text-sm mb-1" href="{% url 'products' %}">x Clear Filters</a>
+<form method="get">
+    <div style="display: grid">
+        {% for field in filter.form %}
+            <div id="form-field-{{ forloop.counter0 }}">
+                {{ field.label_tag }}
+                {{ field }}
+            </div>
+        {% endfor %}
+    </div>
+    <button type="submit" class="btn btn-dark mb-3 mt-2">Filter</button>
+</form>
+{% for product in filter.qs %}
+    <p>{{ product.title }}</p>
+{% endfor %}
+{% endblock %}
