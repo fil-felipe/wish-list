@@ -1,7 +1,0 @@
-Django==4.2.3
-psycopg2-binary==2.9.6
-gunicorn==21.2.0
-django-crispy-forms==2.1
-crispy-bootstrap5==2024.2
-bs4==0.0.2
-urllib3==2.2.1
