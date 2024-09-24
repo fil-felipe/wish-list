@@ -1,14 +1,11 @@
 # Local application run
 
-## run application from terminal
+## run application in dev mode
 ```bash
-python .\app\manage.py runserver --settings=wish_list.settings_dev
+python manage.py runserver --settings=wish_list.settings.dev
 ```
 
-## run application as local docker
-``
-docker-compose up -d --build
-``
+
 
 # Python code checks
 
