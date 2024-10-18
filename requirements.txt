@@ -6,3 +6,4 @@ bs4==0.0.2
 urllib3==2.2.1
 django-filter==24.1
 uwsgi==2.0.26
+social-auth-app-django=5.4.2

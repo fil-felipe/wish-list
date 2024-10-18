@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     "wish_list_app.apps.WishListAppConfig",
     "crispy_forms",
     "crispy_bootstrap5",
-    "django_filters"
+    "django_filters",
+    "social_django",
+    'django_extensions'
 ]
 
 MIDDLEWARE = [
@@ -73,7 +75,9 @@ WSGI_APPLICATION = "wish_list.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
+SOCIAL_AUTH_JSONFIELD_ENABLED = True # used for python-social-auth
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.getenv('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.getenv('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -91,6 +95,10 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
+]
+
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.google.GoogleOAuth2'
 ]
 
 

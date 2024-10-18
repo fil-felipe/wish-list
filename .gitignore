@@ -9,3 +9,6 @@ migrations/
 data/
 wish_list_venv/
 *.txt
+cert.crt
+cert.key
+*.env

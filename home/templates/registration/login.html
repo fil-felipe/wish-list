@@ -18,4 +18,13 @@
       <p><input class="btn btn-primary" type="submit" value="Zaloguj"></p>
     </form>
   </div>
+  <div class="social">
+    <ul>
+      <li class="google">
+        <a href="{% url 'social:begin' 'google-oauth2' %}">
+          Zaloguj się za pomocą konta Google
+        </a>
+      </li>
+    </ul>
+  </div>
 {% endblock %}

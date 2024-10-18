@@ -1,3 +1,9 @@
+from dotenv import load_dotenv
+import os
+
+dotenv_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), '.env')
+load_dotenv(dotenv_path)
+
 from .default import *
 
 DEBUG = True
@@ -13,5 +19,6 @@ DATABASES = {
         "PORT": "5432",
     }
 }
+# INSTALLED_APPS.append('django_extensions')
 
 STATIC_ROOT= BASE_DIR / 'static/'
