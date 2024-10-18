@@ -19,6 +19,6 @@ DATABASES = {
         "PORT": "5432",
     }
 }
-# INSTALLED_APPS.append('django_extensions')
+INSTALLED_APPS.append('django_extensions')
 
 STATIC_ROOT= BASE_DIR / 'static/'
