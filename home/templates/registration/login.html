@@ -3,6 +3,7 @@
 {% block title %}Logowanie{% endblock %}
 
 {% block content %}
+{% load static %}
   <h1>Zaloguj się</h1>
   {% if form.errors %}
   <div class="alert alert-danger" role="alert">
@@ -18,13 +19,10 @@
       <p><input class="btn btn-primary" type="submit" value="Zaloguj"></p>
     </form>
   </div>
-  <div class="social">
-    <ul>
-      <li class="google">
-        <a href="{% url 'social:begin' 'google-oauth2' %}">
-          Zaloguj się za pomocą konta Google
+    <div class="mx-auto p-2">
+        <a type="button" class="btn btn btn-outline-danger btn-lg px-4" href="{% url 'social:begin' 'google-oauth2' %}">
+            <img src="{% static 'images/google-icon-logo.svg' %}" width="30" height="30" alt="home logo"/>
+            Zaloguj się za pomocą konta Google
         </a>
-      </li>
-    </ul>
-  </div>
+    </div>
 {% endblock %}

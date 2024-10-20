@@ -12,3 +12,4 @@ wish_list_venv/
 cert.crt
 cert.key
 *.env
+wish_list/static/

@@ -28,13 +28,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 INSTALLED_APPS = [
     "home.apps.HomeConfig",
+    "wish_list_app.apps.WishListAppConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "wish_list_app.apps.WishListAppConfig",
     "crispy_forms",
     "crispy_bootstrap5",
     "django_filters",
