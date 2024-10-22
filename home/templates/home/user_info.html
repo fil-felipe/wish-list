@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Informacje użytkownika{% endblock %}
+
+{% block content %}
+    <div class="px-4 pt-5 my-5 text-center">
+        {% load static %}
+        <h1 class="display-2 fw-bold">Witaj {{ user.username }}</h1>
+            <div class="mx-auto p-2">
+            <a type="button" class="btn btn btn-outline-primary btn-lg px-4" href="{% url 'wish_list_app:child_register' %}">
+                <img src="{% static 'images/people.svg' %}" width="30" height="30" alt="home logo"/>
+                Dodaj konto dziecka
+            </a>
+        </div>
+
+    </div>
+
+{% endblock %}

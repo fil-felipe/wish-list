@@ -26,3 +26,6 @@ def register(request):
 def get_users(request):
     all_users = User.objects.filter(is_superuser=False)
     return render(request, 'home/user_list.html', {"all_users": all_users})
+
+def user_info(request):
+    return render(request, 'home/user_info.html', {"user": request.user})

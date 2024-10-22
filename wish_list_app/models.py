@@ -2,11 +2,29 @@ from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
 
+
+class ChildUser(User):
+    parent_user = models.ForeignKey(
+        'auth.User', on_delete=models.CASCADE, related_name='children', verbose_name="Rodzic"
+    )
+
+    email = None
+    password = None
+
+    class Meta:
+        indexes = [models.Index(fields=["parent_user"])]
+        verbose_name = "Użytkownik dziecko"
+        verbose_name_plural = "Użytkownicy dziecko"
+
+    def __str__(self):
+        return f"Child: {self.username}, Parent: {self.parent_user.username}"
+
+
 class WishList(models.Model):
     list_name = models.CharField(max_length=250, verbose_name="Nazwa listy")
     slug = models.SlugField(max_length=250)
     list_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="gift_lists_user", verbose_name="Obdarowany")
-    list_creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name="gift_lists_creator")
+    list_creator = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, related_name="gift_lists_creator")
 
     class Meta:
         ordering = ["list_name"]
@@ -27,9 +45,9 @@ class Gift(models.Model):
     offer_url = models.URLField(null=True, blank=True, verbose_name="Link do oferty")
     image_url = models.URLField(null=True, blank=True, verbose_name="Link do zdjęcia")
     created = models.DateTimeField(auto_now_add=True)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, default=None, related_name="gift_creator")
     reserved = models.BooleanField(default=False)
-    reserved_user = models.ForeignKey(User, models.SET_NULL, blank=True, null=True)
-    # reserved_user = models.CharField(max_length=250, blank=True, null=True , verbose_name="Osoba rezerwująca")
+    reserved_user = models.ForeignKey(User, models.SET_NULL, blank=True, null=True, verbose_name="Osoba rezerwująca")
     reserved_time = models.DateTimeField(null=True, blank=True)
 
     class Meta:

@@ -7,8 +7,30 @@ from django.utils.text import slugify
 
 
 from .models import Gift, WishList
-from .forms import AddWishList, AddWishListUser, AddGift, AddGiftToList, FindMetaForm
+from .forms import AddChildUser, AddWishList, AddWishListUser, AddGift, AddGiftToList, FindMetaForm
 from .get_meta.main import find_meta
+
+@login_required
+def add_child_user(request):
+    # optional_parameter = ''
+    form_object = AddChildUser
+
+    if request.method == "POST":
+        form = form_object(data=request.POST)
+        if form.is_valid:
+            new_child_user = form.save(commit=False)
+
+            new_child_user.parent_user = request.user
+            new_child_user.save()
+
+            return redirect('wish_list_app:child_register_done', username=new_child_user.username)
+    else:
+        form = form_object()
+    return render(request, "child_register/child_register.html", {"form": form})
+
+@login_required
+def child_register_done(request, username):
+    return render(request, "child_register/child_register_done.html", {"username": username})
 
 @login_required
 def add_wish_list(request, username=None):
@@ -69,6 +91,7 @@ def add_gift(request, list_name=None):
             else:
                 list_object = new_gift.gift_list
             new_gift.slug = slugify(new_gift.title)
+            new_gift.created_by = request.user
             new_gift.save()
             return redirect(list_object.get_absolute_url())
     else:

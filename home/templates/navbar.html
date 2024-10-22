@@ -25,7 +25,9 @@
       </ul>
       {% if request.user.is_authenticated %}
         <div class="navbar-text p-3">
-          Witaj {{ request.user.first_name }}!
+          <a class="nav-link" href="{% url 'home:user_info' %}">
+            Witaj {{ request.user.first_name }}!
+          </a>
         </div>
         <form method="post" action="{% url 'home:logout' %}">
             {% csrf_token %}

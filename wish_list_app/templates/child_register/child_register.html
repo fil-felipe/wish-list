@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Dodaj dziecko
+{% endblock %}
+
+{% block content %}
+<div class="px-4 pt-5 my-5 text-center">
+    <h1 class="display-5 fw-bold">
+        Dodaj dziecko aby móc tworzyć dla niego listy prezentów
+    </h1>
+    <div class="col-lg-6 mx-auto">
+        <p class="lead mb-4">Wypełnij poniższy formularz i kliknij <strong>dodaj</strong> aby dodać nowego użytkownika.</p>
+    </div>
+    <form method="post">
+        {{ form|crispy }}
+        {% csrf_token %}
+        <input class="btn btn-primary" type="submit" value="Dodaj">
+    </form>
+</div>
+{% endblock %}

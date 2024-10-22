@@ -1,6 +1,11 @@
 from django import forms
-from .models import WishList, Gift
+from .models import ChildUser, WishList, Gift
 
+
+class AddChildUser(forms.ModelForm):
+    class Meta:
+        model = ChildUser
+        fields = ["username", "first_name", "last_name"]
 
 class AddWishList(forms.ModelForm):
     class Meta:
