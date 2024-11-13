@@ -136,3 +136,36 @@ def find_meta_info(request):
 #     else:
 #         form = FindMetaForm()
 #     return render(request, "wish_list_app/reservation/view_reserved.html", {"form": form, "meta_info": meta_info})
+
+@login_required
+def edit_gift(request, username, list_name, gift_slug):
+    gift = get_object_or_404(Gift, 
+                            gift_list__list_user__username=username,
+                            gift_list__slug=list_name,
+                            slug=gift_slug)
+    
+    if request.method == "POST":
+        form = AddGiftToList(instance=gift, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect(gift.get_absolute_url())
+    else:
+        form = AddGiftToList(instance=gift)
+    
+    return render(request, 
+                 "wish_list_app/gifts/edit_gift.html",
+                 {"form": form, "gift": gift})
+
+@login_required
+def delete_gift(request, gift_id):
+    gift = get_object_or_404(Gift, id=gift_id)
+
+    if request.method == "POST":
+        if request.user == gift.created_by or request.user == gift.gift_list.list_creator:
+                list_url = gift.gift_list.get_absolute_url()
+                gift.delete()
+                return redirect(list_url)
+    
+    return render(request, 
+                 "wish_list_app/gifts/delete_gift.html",
+                 {"gift": gift})

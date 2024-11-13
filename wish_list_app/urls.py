@@ -14,5 +14,10 @@ urlpatterns = [
     path("add_gift/<slug:list_name>", views.add_gift, name="add_gift_list"),
     path("reserved", views.reserve_gift, name="reserve_gift"),
     path("find_meta", views.find_meta_info, name="find_meta"),
+    path("<username>/<slug:list_name>/<slug:gift_slug>/edit/", 
+         views.edit_gift, 
+         name="edit_gift"),
+    path("delete_gift/<int:gift_id>", views.delete_gift, 
+         name="delete_gift")
 ]
 

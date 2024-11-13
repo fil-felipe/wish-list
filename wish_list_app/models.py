@@ -45,7 +45,7 @@ class Gift(models.Model):
     offer_url = models.URLField(null=True, blank=True, verbose_name="Link do oferty")
     image_url = models.URLField(null=True, blank=True, verbose_name="Link do zdjęcia")
     created = models.DateTimeField(auto_now_add=True)
-    created_by = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, default=None, related_name="gift_creator")
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, default=None, related_name="gift_creator")
     reserved = models.BooleanField(default=False)
     reserved_user = models.ForeignKey(User, models.SET_NULL, blank=True, null=True, verbose_name="Osoba rezerwująca")
     reserved_time = models.DateTimeField(null=True, blank=True)
@@ -68,4 +68,10 @@ class Gift(models.Model):
     def get_reserved_url(self):
         return reverse(
             "wish_list_app:reserve_gift", args=[self.gift_list.list_user.username, self.gift_list.slug, self.slug]
+        )
+
+    def get_edit_url(self):
+        return reverse(
+            "wish_list_app:edit_gift",
+            args=[self.gift_list.list_user.username, self.gift_list.slug, self.slug]
         )

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Edytuj prezent{% endblock %}
+
+{% block content %}
+<div class="px-4 pt-5 my-5 text-center">
+    <h1 class="display-5 fw-bold">
+        Edytuj prezent: {{ gift.title }}
+    </h1>
+    <div class="col-lg-6 mx-auto">
+        <p class="lead mb-4">Zmień dane prezentu i kliknij <strong>zapisz</strong> aby zachować zmiany.</p>
+    </div>
+    <form method="post">
+        {{ form|crispy }}
+        {% csrf_token %}
+        <input class="btn btn-primary" type="submit" value="Zapisz">
+        <a class="btn btn-secondary" href="{{ gift.get_absolute_url }}">Anuluj</a>
+    </form>
+</div>
+{% endblock %} 
