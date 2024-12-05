@@ -14,6 +14,7 @@ class GiftAdmin(admin.ModelAdmin):
     list_display = ["title", "gift_list", "get_user_name"]
     prepopulated_fields = {"slug": ("title",)}
 
+
 @admin.register(ChildUser)
 class ChildUserAdmin(admin.ModelAdmin):
     list_display = ["username", "first_name", "last_name", "parent_user"]

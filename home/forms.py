@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 
+
 class LoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
@@ -12,7 +13,7 @@ class UserRegistrationForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name', 'email']
+        fields = ["username", "first_name", "last_name", "email"]
 
     def clean_password2(self):
         cd = self.cleaned_data
@@ -21,8 +22,7 @@ class UserRegistrationForm(forms.ModelForm):
         return cd.get("password2")
 
     def clean_email(self):
-        data = self.cleaned_data.get('email')
+        data = self.cleaned_data.get("email")
         if User.objects.filter(email=data).exists():
             raise forms.ValidationError("Ten mail jest już zajęty.")
         return data
-

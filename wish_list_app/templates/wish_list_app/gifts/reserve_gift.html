@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Zarezerwuj prezent{% endblock %}
+
+{% block content %}
+<div class="px-4 pt-5 my-5 text-center">
+    <p class="lead mb-4">
+        Czy napewno chcesz zarezerwować prezent <strong>{{ gift.title }}</strong> dla <strong>{{ gift.gift_list.list_user.username }}</strong> z listy <strong>{{ gift.gift_list.list_name }}</strong> ?
+    </p>
+        <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Zarezerwuj</button>
+        <a class="btn btn-secondary" href="{{ gift.get_absolute_url }}">Anuluj</a>
+    </form>
+</div>
+{% endblock %} 
