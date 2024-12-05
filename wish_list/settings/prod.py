@@ -3,7 +3,7 @@ from .default import *
 
 DEBUG = False
 
-ALLOWED_HOSTS = ["prezent.filip-adamek.pl"]
+ALLOWED_HOSTS = ["prezent.filip-adamek.pl","prezent.filada.eu"]
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 DATABASES = {

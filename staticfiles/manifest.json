@@ -1,0 +1,15 @@
+{
+  "name": "Aplikacja z lista prezentow",
+  "short_name": "Prezenty",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#007bff",
+  "icons": [
+    {
+      "src": "/staticfiles/images/wish_list_logo.jpg",
+      "type": "image/jpg",
+      "sizes": "192x192"
+    }
+  ]
+}
