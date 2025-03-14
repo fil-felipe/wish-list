@@ -22,6 +22,12 @@
             Listy prezentów
           </a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'wish_list_app:view_reserved_gifts' %}">
+            <img src="{% static 'images/gift.svg' %}" width="30" height="30" alt="home logo"/>
+            Zarezerwowane prezenty
+          </a>
+        </li>
       </ul>
       {% if request.user.is_authenticated %}
         <div class="navbar-text p-3">

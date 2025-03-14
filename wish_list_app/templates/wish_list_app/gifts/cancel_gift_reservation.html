@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Anuluj rezerwacje prezentu{% endblock %}
+
+{% block content %}
+<div class="px-4 pt-5 my-5 text-center">
+    <p class="lead mb-4">
+        Czy napewno chcesz anulować rezerwację prezentu <strong>{{ gift.title }}</strong> dla <strong>{{ gift.gift_list.list_user.username }}</strong> z listy <strong>{{ gift.gift_list.list_name }}</strong> ?
+    </p>
+        <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Potwierdź</button>
+        <a class="btn btn-secondary" href="{% url 'wish_list_app:view_reserved_gifts' %}">Anuluj</a>
+    </form>
+</div>
+{% endblock %} 

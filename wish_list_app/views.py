@@ -1,9 +1,9 @@
 from datetime import datetime
 from django.shortcuts import render, get_object_or_404, redirect
-from django_filters.views import FilterView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.utils.text import slugify
+from django.urls import reverse
 
 
 from .models import Gift, WishList
@@ -159,19 +159,14 @@ def find_meta_info(request):
         {"form": form, "meta_info": meta_info},
     )
 
-
-# TODO: get all gifts reserved by User and list them
-# @login_required
-# def view_reserved_gifts(request):
-#     reserved_gift_list = None
-#     if request.method == "POST":
-#         form = FindMetaForm(request.POST)
-#         if form.is_valid():
-#             cd = form.cleaned_data
-#             meta_info = find_meta(cd.get("html"))
-#     else:
-#         form = FindMetaForm()
-#     return render(request, "wish_list_app/reservation/view_reserved.html", {"form": form, "meta_info": meta_info})
+@login_required
+def view_reserved_gifts(request):
+    reserved_gifts = Gift.objects.filter(reserved_user=request.user)
+    return render(
+        request,
+        "wish_list_app/reservation/view_reserved.html",
+        {"reserved_gifts": reserved_gifts},
+    )
 
 
 @login_required
@@ -224,3 +219,17 @@ def delete_gift(request, gift_id):
             return redirect(list_url)
 
     return render(request, "wish_list_app/gifts/delete_gift.html", {"gift": gift})
+
+@login_required
+def cancel_gift_reservation(request, gift_id):
+    gift = get_object_or_404(Gift, id=gift_id)
+
+    if request.method == "POST":
+        if request.user == gift.reserved_user:
+            gift.reserved = False
+            gift.reserved_time = None
+            gift.reserved_user = None
+            gift.save()
+            return redirect(reverse("wish_list_app:view_reserved_gifts"))
+
+    return render(request, "wish_list_app/gifts/cancel_gift_reservation.html", {"gift": gift})
